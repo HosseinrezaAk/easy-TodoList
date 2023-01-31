@@ -1,9 +1,9 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const { response } = require("express");
+
 
 const app = express();
-app.use("view engine", "ejs");
+app.set('view engine', 'ejs');
 
 app.get("/", function( req, res){
     var today = new Date();
