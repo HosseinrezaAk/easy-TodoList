@@ -3,7 +3,7 @@ const bodyParser = require("body-parser");
 
 
 const app = express();
-app.set('view engine', 'ejs');
+app.set('view engine', 'ejs'); // to pass data to front. check document
 
 app.get("/", function( req, res){
     var today = new Date();
