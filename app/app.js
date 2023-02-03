@@ -6,7 +6,7 @@ const app = express();
 app.use(bodyParser.urlencoded({extended : true}));
 app.set('view engine', 'ejs'); // to pass data to front. check document
 
-var item = "";
+var items = [];
 
 app.get("/", function( req, res){
     var today = new Date();
@@ -20,11 +20,12 @@ app.get("/", function( req, res){
     var day = today.toLocaleDateString("en-US", options);
     res.render("list", {
         kindOfDay : day,
-        newListItem : item
+        newListItems : items
     })
 });
 app.post("/", function( req, res){
-    item = req.body.newItem;
+    var item = req.body.newItem;
+    items.push( req.body.newItem);
     res.redirect("/");
 });
 
