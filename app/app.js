@@ -27,7 +27,7 @@ const defaultItems = [item1, item2, item3];
 
 const listSchema = {
     name: String,
-    item: [itemSchema]
+    items: [itemSchema]
 };
 const List = mongoose.model("List", listSchema);
 app.get("/", function( req, res){
@@ -74,10 +74,20 @@ app.post("/delete", function(req, res){
 app.get("/:customListName", function(req, res){
 
     const customName = req.params.customListName;
-    const list = new List({
-        name: customName,
-
+    List.findOne({name: customName}, function(err, foundList){
+        if(!err){
+            if(!foundList){
+                const list = new List({
+                    name: customName,
+                    items: defaultItems
+                });
+                list.save();
+            }else{
+                
+            }
+        }
     });
+    
 });
 app.get("/about" , function( req, res){
     res.render("about");
